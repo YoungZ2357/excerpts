@@ -45,7 +45,7 @@ fn random_excerpt(state: State<'_, Excerpts>) -> Option<Excerpt> {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    let data: Vec<Excerpt> = serde_json::from_str(include_str!("../data/sample.json")).expect("sample.json 格式错误");
+    let data: Vec<Excerpt> = serde_json::from_str(include_str!("../data/老子.json")).expect("sample.json 格式错误");
 
     tauri::Builder::default()
         .manage(Excerpts { items: data, last: Mutex::new(None) })
