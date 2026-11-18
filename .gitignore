@@ -1,0 +1,11 @@
+# Vibe Coding
+.claude
+
+# IDE
+.idea
+
+# Node.js
+node_modules
+
+# Data
+app/src-tauri/data

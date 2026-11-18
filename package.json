@@ -1,0 +1,20 @@
+{
+  "name": "excerpts",
+  "private": true,
+  "workspaces": [
+    "app",
+    "pipeline",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run tauri -w app -- dev",
+    "build": "npm run tauri -w app -- build",
+    "pipeline": "npm run start -w pipeline --"
+  },
+  "devDependencies": {
+    "@types/node": "^24",
+    "tsx": "^4",
+    "typescript": "~6.0.3",
+    "vitest": "^5.1.0"
+  }
+}

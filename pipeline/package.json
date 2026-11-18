@@ -1,0 +1,12 @@
+{
+  "name": "@excerpts/pipeline",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/cli.ts",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@excerpts/schema": "*"
+  }
+}

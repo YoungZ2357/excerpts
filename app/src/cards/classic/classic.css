@@ -1,0 +1,4 @@
+.classic-card { padding: 16px 20px; cursor: pointer;}
+.classic-text { font-size: 1.25rem; margin: 0 0 8px; }
+.classic-translation { opacity: 0.75; margin: 0 0 8px; }
+.classic-source { text-align: right; opacity: 0.6; font-size: 0.875rem; }
