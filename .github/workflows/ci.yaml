@@ -31,6 +31,9 @@ jobs:
 
       - name: TS type check
         run: npm run typecheck
+
+      - name: Run tests
+        run: npm test
   gitleaks:
     runs-on: ubuntu-latest
     permissions:
