@@ -27,6 +27,9 @@ jobs:
 
       - name: Run ESLint
         run: npm run lint
+
+      - name: TS type check
+        run: npm run typecheck
   gitleaks:
     runs-on: ubuntu-latest
     steps:

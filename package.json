@@ -11,7 +11,8 @@
     "build": "npm run tauri -w app -- build",
     "pipeline": "npm run start -w pipeline --",
     "lint": "eslint",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
