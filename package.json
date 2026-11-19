@@ -12,7 +12,7 @@
     "pipeline": "npm run start -w pipeline --",
     "lint": "eslint",
     "lint:fix": "eslint . --fix",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit -p app && tsc --noEmit -p app/tsconfig.node.json && tsc --noEmit -p pipeline"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
