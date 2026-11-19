@@ -8,16 +8,27 @@ function App() {
     const [error, setError] = useState<string | null>(null);
     const { Component } = getLayout("classic");
 
-    async function next() {
-        try {
-            setExcerpt(await invoke<Excerpt | null>("random_excerpt"));
-            setError(null);
-        } catch (e) {
-            setError(String(e));
-        }
+    // 只在 Promise 回调里 setState，避免在 effect 体内同步触发更新
+    function load(isActive: () => boolean = () => true) {
+        invoke<Excerpt | null>("random_excerpt").then(
+            (result) => {
+                if (!isActive()) return;
+                setExcerpt(result);
+                setError(null);
+            },
+            (e: unknown) => {
+                if (isActive()) setError(String(e));
+            },
+        );
     }
 
-    useEffect(() => { void next(); }, []);
+    const next = () => load();
+
+    useEffect(() => {
+        let active = true;
+        load(() => active);
+        return () => { active = false; };
+    }, []);
 
     if (error) return <p style={{ color: "red" }}>{error}</p>;
     return excerpt ? <Component excerpt={excerpt} onNext={next} /> : <p>暂无摘抄</p>;

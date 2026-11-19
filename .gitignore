@@ -9,3 +9,5 @@ node_modules
 
 # Data
 app/src-tauri/data
+# Fonts（存储方式/位置待定，暂不入库）
+app/src/assets/fonts

@@ -9,12 +9,22 @@
   "scripts": {
     "dev": "npm run tauri -w app -- dev",
     "build": "npm run tauri -w app -- build",
-    "pipeline": "npm run start -w pipeline --"
+    "pipeline": "npm run start -w pipeline --",
+    "lint": "eslint",
+    "test": "npm run test -w pipeline",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit -p app && tsc --noEmit -p app/tsconfig.node.json && tsc --noEmit -p pipeline"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/node": "^24",
+    "eslint": "^10.15.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.8",
+    "globals": "^17.14.0",
     "tsx": "^4",
     "typescript": "~6.0.3",
+    "typescript-eslint": "^8.73.0",
     "vitest": "^5.1.0"
   }
 }

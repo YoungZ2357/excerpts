@@ -1,4 +1,4 @@
-import type { CardLayout, CardProps } from "../types.ts";
+import type { CardProps } from "../types.ts";
 import "./classic.css"
 
 function ClassicCard({ excerpt, onNext }: CardProps) {
@@ -13,8 +13,4 @@ function ClassicCard({ excerpt, onNext }: CardProps) {
 );
 }
 
-export const classicLayout: CardLayout = {
-    id: "classic",
-    name: "经典",
-    Component: ClassicCard,
-};
+export default ClassicCard;

@@ -1,5 +1,5 @@
 import type { CardLayout } from "./types.ts";
-import { classicLayout } from "./classic/ClassicCard.tsx";
+import { classicLayout } from "./classic/index.ts";
 
 const layouts: CardLayout[] = [classicLayout];
 
