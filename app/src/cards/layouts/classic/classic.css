@@ -1,0 +1,8 @@
+/* 只描述 classic 的排列方式；字体、字号、对齐等全部来自卡片样式（见 style/card-base.css） */
+.classic-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ex-card-gap);
+    height: 100%;
+    cursor: pointer;
+}

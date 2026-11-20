@@ -14,7 +14,8 @@
       {
         "title": "app",
         "width": 400,
-        "height": 300
+        "height": 300,
+        "resizable": false
       }
     ],
     "security": {
