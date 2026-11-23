@@ -11,6 +11,7 @@ import {
     type TextStyle,
 } from "@excerpts/schema";
 import { CLASSIC_ID, CLASSIC_STYLE, classicCard } from "../presets/classic.ts";
+import { FONT_NAME } from "../fonts/manifest.ts";
 
 /**
  * 卡片解析：把一张卡片（及其 extends 链）合并成每个字段都有值的 ResolvedCardStyle。
@@ -82,8 +83,6 @@ const cssValue = (property: string): Check<string> => (v) => {
     if (css?.supports && !css.supports(property, v)) return undefined;
     return v.trim();
 };
-
-const FONT_NAME = /^[^"\\;{}<>]{1,64}$/;
 
 const fontFamily: Check<string[]> = (v) => {
     if (!Array.isArray(v) || v.length === 0 || v.length > 16) return undefined;

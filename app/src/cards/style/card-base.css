@@ -34,6 +34,7 @@ body,
     --s-left: var(--ex-text-left);
     --s-top: var(--ex-text-top);
     --s-transform: var(--ex-text-transform);
+    --s-width: var(--ex-text-width);
     --s-max-width: var(--ex-text-max-width);
 }
 
@@ -52,6 +53,7 @@ body,
     --s-left: var(--ex-translation-left);
     --s-top: var(--ex-translation-top);
     --s-transform: var(--ex-translation-transform);
+    --s-width: var(--ex-translation-width);
     --s-max-width: var(--ex-translation-max-width);
 }
 
@@ -70,6 +72,7 @@ body,
     --s-left: var(--ex-source-left);
     --s-top: var(--ex-source-top);
     --s-transform: var(--ex-source-transform);
+    --s-width: var(--ex-source-width);
     --s-max-width: var(--ex-source-max-width);
 }
 
@@ -88,6 +91,7 @@ body,
     --s-left: var(--ex-path-left);
     --s-top: var(--ex-path-top);
     --s-transform: var(--ex-path-transform);
+    --s-width: var(--ex-path-width);
     --s-max-width: var(--ex-path-max-width);
 }
 
@@ -107,5 +111,7 @@ body,
     left: var(--s-left);
     top: var(--s-top);
     transform: var(--s-transform);
+    width: var(--s-width);
     max-width: var(--s-max-width);
+    box-sizing: border-box;
 }

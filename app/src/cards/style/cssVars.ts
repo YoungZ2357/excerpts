@@ -45,7 +45,9 @@ export function toCssVars(style: ResolvedCardStyle): Record<string, string> {
         vars[`${p}left`] = s.position ? `${s.position.x}%` : "auto";
         vars[`${p}top`] = s.position ? `${s.position.y}%` : "auto";
         vars[`${p}transform`] = s.position ? ANCHOR_TRANSFORM[s.position.anchor ?? "top-left"] : "none";
-        vars[`${p}max-width`] = s.maxWidth === null ? "none" : `${s.maxWidth}%`;
+        // 绝对定位的元素按内容收缩宽度，若不显式设置 width，left: 50% 时最多只能占到卡片一半宽
+        vars[`${p}width`] = s.position ? "max-content" : "auto";
+        vars[`${p}max-width`] = s.maxWidth !== null ? `${s.maxWidth}%` : s.position ? "100%" : "none";
     }
 
     return vars;

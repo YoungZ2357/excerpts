@@ -8,7 +8,7 @@ function ClassicLayout({ excerpt, onNext }: CardProps) {
             {excerpt.translation && (
                 <p className="ex-slot" data-slot="translation">{excerpt.translation}</p>
             )}
-            <footer className="ex-slot" data-slot="source">--{excerpt.source}</footer>
+            <footer className="ex-slot" data-slot="source">——《{excerpt.source}》</footer>
             <p className="ex-slot" data-slot="path">{excerpt.path.join(" · ")}</p>
         </article>
     );

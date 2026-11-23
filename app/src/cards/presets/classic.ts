@@ -1,11 +1,18 @@
 import { CARD_SCHEMA_VERSION, type CardDef, type ResolvedCardStyle, type ResolvedSlotStyle } from "@excerpts/schema";
 
-const FONT_STACK = ["Inter", "Avenir", "Helvetica", "Arial", "sans-serif"];
+/**
+ * 首选打包字体思源宋体（assets/fonts，见 fonts.json：Light = 300，Bold = 700）；
+ * 打包字体缺失时（如新 clone 的仓库）退回系统中常见的宋体 / 衬线字体。
+ */
+const FONT_STACK = ["Source Han Serif SC", "Noto Serif SC", "Songti SC", "SimSun", "serif"];
+
+const LIGHT = 300;
+const BOLD = 700;
 
 const slotBase: ResolvedSlotStyle = {
     fontFamily: FONT_STACK,
-    fontSize: 16,
-    fontWeight: 400,
+    fontSize: 20,
+    fontWeight: LIGHT,
     lineHeight: 1.5,
     letterSpacing: 0,
     color: "inherit",
@@ -22,13 +29,14 @@ const slotBase: ResolvedSlotStyle = {
  * 类型为 ResolvedCardStyle，编译期保证每个字段都有值。
  */
 export const CLASSIC_STYLE: ResolvedCardStyle = {
-    size: { width: 400, height: 300 },
+    size: { width: 500, height: 280 },
     padding: [16, 20],
     gap: 8,
-    background: "transparent",
+    // 背景作用在卡片外框上，铺满整个窗口（包括四周留白）
+    background: "#FEF6E5",
     radius: 0,
     slots: {
-        text: { ...slotBase, fontSize: 20, lineHeight: 1.2 },
+        text: { ...slotBase, fontSize: 28, fontWeight: BOLD, lineHeight: 1.2, align: "center" },
         translation: { ...slotBase, opacity: 0.75 },
         source: { ...slotBase, fontSize: 14, opacity: 0.6, align: "right" },
         path: { ...slotBase, fontSize: 12, opacity: 0.5, visible: false },

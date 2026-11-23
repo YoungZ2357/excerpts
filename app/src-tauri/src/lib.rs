@@ -1,8 +1,12 @@
+mod cards;
+
 use std::collections::hash_map::RandomState;
 use std::hash::BuildHasher;
+use std::path::PathBuf;
 use std::sync::Mutex;
 use serde::{Deserialize, Serialize};
-use tauri::State;
+use tauri::{AppHandle, Manager, State};
+use tauri_plugin_opener::OpenerExt;
 
 /// 与 @excerpts/schema 中的 Excerpt 保持一致
 #[derive(Serialize, Deserialize, Clone)]
@@ -49,13 +53,58 @@ fn random_excerpt(state: State<'_, Excerpts>) -> Option<Excerpt> {
     Some(items[idx].clone())
 }
 
+fn config_dir(app: &AppHandle) -> Result<PathBuf, String> {
+    app.path().app_config_dir().map_err(|e| format!("无法定位配置目录：{e}"))
+}
+
+fn cards_dir(app: &AppHandle) -> Result<PathBuf, String> {
+    Ok(config_dir(app)?.join("cards"))
+}
+
+fn settings_path(app: &AppHandle) -> Result<PathBuf, String> {
+    Ok(config_dir(app)?.join("settings.json"))
+}
+
+/// 读取 `<配置目录>/cards/*.json`，内容校验由前端完成
+#[tauri::command]
+fn list_user_cards(app: AppHandle) -> Result<Vec<cards::UserCardFile>, String> {
+    Ok(cards::scan_cards_dir(&cards_dir(&app)?))
+}
+
+#[tauri::command]
+fn get_settings(app: AppHandle) -> Result<cards::Settings, String> {
+    Ok(cards::load_settings(&settings_path(&app)?))
+}
+
+#[tauri::command]
+fn set_settings(app: AppHandle, settings: cards::Settings) -> Result<(), String> {
+    cards::save_settings(&settings_path(&app)?, &settings).map_err(|e| format!("保存设置失败：{e}"))
+}
+
+/// 用系统文件管理器打开卡片目录，不存在时先创建
+#[tauri::command]
+fn open_cards_dir(app: AppHandle) -> Result<(), String> {
+    let dir = cards_dir(&app)?;
+    std::fs::create_dir_all(&dir).map_err(|e| format!("无法创建卡片目录：{e}"))?;
+    app.opener()
+        .open_path(dir.to_string_lossy(), None::<&str>)
+        .map_err(|e| format!("无法打开卡片目录：{e}"))
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     let data: Vec<Excerpt> = serde_json::from_str(include_str!("../data/sample.json")).expect("sample.json 格式错误");
 
     tauri::Builder::default()
+        .plugin(tauri_plugin_opener::init())
         .manage(Excerpts { items: data, last: Mutex::new(None) })
-        .invoke_handler(tauri::generate_handler![random_excerpt])
+        .invoke_handler(tauri::generate_handler![
+            random_excerpt,
+            list_user_cards,
+            get_settings,
+            set_settings,
+            open_cards_dir,
+        ])
         .run(tauri::generate_context!())
     .expect("error while running tauri application");
 }
