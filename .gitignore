@@ -9,5 +9,8 @@ node_modules
 
 # Data
 app/src-tauri/data
-# Fonts（存储方式/位置待定，暂不入库）
-app/src/assets/fonts
+# Fonts：只入库 classic 使用的 woff2 与清单，原始 otf（source/）及其他字体不入库
+app/src/assets/fonts/*
+!app/src/assets/fonts/fonts.json
+!app/src/assets/fonts/SourceHanSerifSC-Light.woff2
+!app/src/assets/fonts/SourceHanSerifSC-Bold.woff2
