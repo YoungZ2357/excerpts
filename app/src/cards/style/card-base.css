@@ -1,0 +1,117 @@
+/* 卡片框架与插槽的通用样式：所有布局共享，样式值全部来自 toCssVars 生成的变量 */
+
+html,
+body,
+#root {
+    margin: 0;
+    height: 100%;
+}
+
+.ex-card {
+    position: relative;
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    padding: var(--ex-card-padding);
+    background: var(--ex-card-background);
+    border-radius: var(--ex-card-radius);
+}
+
+/* 把 --ex-<slot>-* 映射成插槽内部统一使用的 --s-* */
+.ex-slot[data-slot="text"] {
+    --s-font: var(--ex-text-font);
+    --s-size: var(--ex-text-size);
+    --s-weight: var(--ex-text-weight);
+    --s-line-height: var(--ex-text-line-height);
+    --s-letter-spacing: var(--ex-text-letter-spacing);
+    --s-color: var(--ex-text-color);
+    --s-opacity: var(--ex-text-opacity);
+    --s-align: var(--ex-text-align);
+    --s-wm: var(--ex-text-wm);
+    --s-display: var(--ex-text-display);
+    --s-position: var(--ex-text-position);
+    --s-left: var(--ex-text-left);
+    --s-top: var(--ex-text-top);
+    --s-transform: var(--ex-text-transform);
+    --s-width: var(--ex-text-width);
+    --s-max-width: var(--ex-text-max-width);
+}
+
+.ex-slot[data-slot="translation"] {
+    --s-font: var(--ex-translation-font);
+    --s-size: var(--ex-translation-size);
+    --s-weight: var(--ex-translation-weight);
+    --s-line-height: var(--ex-translation-line-height);
+    --s-letter-spacing: var(--ex-translation-letter-spacing);
+    --s-color: var(--ex-translation-color);
+    --s-opacity: var(--ex-translation-opacity);
+    --s-align: var(--ex-translation-align);
+    --s-wm: var(--ex-translation-wm);
+    --s-display: var(--ex-translation-display);
+    --s-position: var(--ex-translation-position);
+    --s-left: var(--ex-translation-left);
+    --s-top: var(--ex-translation-top);
+    --s-transform: var(--ex-translation-transform);
+    --s-width: var(--ex-translation-width);
+    --s-max-width: var(--ex-translation-max-width);
+}
+
+.ex-slot[data-slot="source"] {
+    --s-font: var(--ex-source-font);
+    --s-size: var(--ex-source-size);
+    --s-weight: var(--ex-source-weight);
+    --s-line-height: var(--ex-source-line-height);
+    --s-letter-spacing: var(--ex-source-letter-spacing);
+    --s-color: var(--ex-source-color);
+    --s-opacity: var(--ex-source-opacity);
+    --s-align: var(--ex-source-align);
+    --s-wm: var(--ex-source-wm);
+    --s-display: var(--ex-source-display);
+    --s-position: var(--ex-source-position);
+    --s-left: var(--ex-source-left);
+    --s-top: var(--ex-source-top);
+    --s-transform: var(--ex-source-transform);
+    --s-width: var(--ex-source-width);
+    --s-max-width: var(--ex-source-max-width);
+}
+
+.ex-slot[data-slot="path"] {
+    --s-font: var(--ex-path-font);
+    --s-size: var(--ex-path-size);
+    --s-weight: var(--ex-path-weight);
+    --s-line-height: var(--ex-path-line-height);
+    --s-letter-spacing: var(--ex-path-letter-spacing);
+    --s-color: var(--ex-path-color);
+    --s-opacity: var(--ex-path-opacity);
+    --s-align: var(--ex-path-align);
+    --s-wm: var(--ex-path-wm);
+    --s-display: var(--ex-path-display);
+    --s-position: var(--ex-path-position);
+    --s-left: var(--ex-path-left);
+    --s-top: var(--ex-path-top);
+    --s-transform: var(--ex-path-transform);
+    --s-width: var(--ex-path-width);
+    --s-max-width: var(--ex-path-max-width);
+}
+
+.ex-slot {
+    margin: 0;
+    font-family: var(--s-font);
+    font-size: var(--s-size);
+    font-weight: var(--s-weight);
+    line-height: var(--s-line-height);
+    letter-spacing: var(--s-letter-spacing);
+    color: var(--s-color);
+    opacity: var(--s-opacity);
+    text-align: var(--s-align);
+    writing-mode: var(--s-wm);
+    display: var(--s-display);
+    position: var(--s-position);
+    left: var(--s-left);
+    top: var(--s-top);
+    transform: var(--s-transform);
+    width: var(--s-width);
+    max-width: var(--s-max-width);
+    box-sizing: border-box;
+}

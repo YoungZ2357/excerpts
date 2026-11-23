@@ -11,7 +11,7 @@
     "build": "npm run tauri -w app -- build",
     "pipeline": "npm run start -w pipeline --",
     "lint": "eslint",
-    "test": "npm run test -w pipeline",
+    "test": "npm run test -w pipeline && npm run test -w app",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit -p app && tsc --noEmit -p app/tsconfig.node.json && tsc --noEmit -p pipeline"
   },

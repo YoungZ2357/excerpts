@@ -9,3 +9,4 @@ export interface Excerpt {
     source: string;
     extras?: Record<string, unknown>; //任何扩展内容
 }
+export * from "./card.ts";

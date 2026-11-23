@@ -1,0 +1,12 @@
+[
+  {
+    "family": "Source Han Serif SC",
+    "file": "SourceHanSerifSC-Bold.woff2",
+    "weight": 700
+  },
+  {
+    "family": "Source Han Serif SC",
+    "file": "SourceHanSerifSC-Light.woff2",
+    "weight": 300
+  }
+]

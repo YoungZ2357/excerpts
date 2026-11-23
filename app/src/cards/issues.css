@@ -1,0 +1,35 @@
+/* 问题浮层不受卡片样式影响，明暗主题下都使用深色半透明背景 */
+.ex-issues {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    box-sizing: border-box;
+    padding: 12px 16px;
+    overflow: auto;
+    background: rgba(20, 20, 20, 0.92);
+    color: #f6f6f6;
+    font: 13px/1.5 system-ui, sans-serif;
+    text-align: left;
+    cursor: pointer;
+}
+
+.ex-issues h2 {
+    margin: 0 0 8px;
+    font-size: 14px;
+}
+
+.ex-issues ol {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.ex-issues li {
+    margin-bottom: 4px;
+    word-break: break-all;
+}
+
+.ex-issues-hint {
+    margin: 12px 0 0;
+    opacity: 0.6;
+    font-size: 12px;
+}
