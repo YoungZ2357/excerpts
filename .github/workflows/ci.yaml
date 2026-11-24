@@ -34,6 +34,48 @@ jobs:
 
       - name: Run tests
         run: npm test
+  rust:
+    name: Rust Test & Clippy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+
+      - name: Cache Cargo
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: app/src-tauri
+
+      # tauri::generate_context! 需要 frontendDist 目录存在
+      - name: Build frontend
+        run: |
+          npm ci
+          npm run build -w app
+
+      - name: Clippy
+        working-directory: app/src-tauri
+        run: cargo clippy --all-targets --locked -- -D warnings
+
+      - name: Test
+        working-directory: app/src-tauri
+        run: cargo test --locked
+
   gitleaks:
     runs-on: ubuntu-latest
     permissions:

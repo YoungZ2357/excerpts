@@ -12,5 +12,6 @@ app/src-tauri/data
 # Fonts：只入库 classic 使用的 woff2 与清单，原始 otf（source/）及其他字体不入库
 app/src/assets/fonts/*
 !app/src/assets/fonts/fonts.json
+!app/src/assets/fonts/LICENSE-SourceHanSerif.txt
 !app/src/assets/fonts/SourceHanSerifSC-Light.woff2
 !app/src/assets/fonts/SourceHanSerifSC-Bold.woff2

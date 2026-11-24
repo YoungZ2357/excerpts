@@ -1,0 +1,60 @@
+name: Release
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    name: Build Windows installer
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Cargo
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: app/src-tauri
+
+      - name: Install dependencies
+        run: npm ci
+
+      # 生成草稿 release，确认无误后在 GitHub 上手动发布
+      - name: Build and upload
+        id: tauri
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          projectPath: app
+          tauriScript: npm run tauri --
+          tagName: ${{ github.ref_type == 'tag' && github.ref_name || 'v__VERSION__' }}
+          releaseName: Excerpts ${{ github.ref_type == 'tag' && github.ref_name || 'v__VERSION__' }}
+          releaseBody: 提供安装版（setup.exe）与便携版（portable.exe，单文件免安装，数据保存在 exe 同目录的 ExcerptsData 中）。程序未签名，首次运行时 SmartScreen 可能提示，选择「更多信息 → 仍要运行」即可。内置字体思源宋体（Source Han Serif SC）© Adobe，以 SIL Open Font License 1.1 授权，详见仓库中的 THIRD_PARTY_NOTICES.md。
+          releaseDraft: true
+          prerelease: false
+
+      # 便携版：单个 exe，数据写在 exe 同目录（使用单独的 target/portable 目录构建）
+      - name: Build portable exe
+        run: npm run build:portable
+
+      - name: Upload portable exe
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.tauri.outputs.appVersion }}
+        run: gh release upload "v$VERSION" "app/src-tauri/target/release/bundle/portable/Excerpts_${VERSION}_x64-portable.exe" --clobber
