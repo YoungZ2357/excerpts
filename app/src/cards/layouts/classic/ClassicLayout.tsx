@@ -11,7 +11,10 @@ function ClassicLayout({ excerpt, onNext }: CardProps) {
             <div className="classic-body">
                 <p className="ex-slot" data-slot="text">{excerpt.text}</p>
                 {excerpt.translation && (
-                    <p className="ex-slot" data-slot="translation">{excerpt.translation}</p>
+                    <>
+                        <hr className="classic-divider" />
+                        <p className="ex-slot" data-slot="translation">{excerpt.translation}</p>
+                    </>
                 )}
             </div>
             <footer className="classic-footer">
