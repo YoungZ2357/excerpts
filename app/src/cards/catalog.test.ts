@@ -3,12 +3,12 @@ import { CARD_SCHEMA_VERSION } from "@excerpts/schema";
 import { BUILTIN_CARDS, buildCatalog, makeResolveContext } from "./catalog.ts";
 import { resolveCard } from "./style/resolve.ts";
 
-const hasLayout = (id: string) => id === "classic";
+import { hasLayout } from "./registry.ts";
 
 describe("buildCatalog", () => {
     it("没有用户卡片时只有内置卡片，classic 排第一", () => {
         const c = buildCatalog(BUILTIN_CARDS, []);
-        expect(c.entries.map((e) => e.id)).toEqual(["classic", "naive"]);
+        expect(c.entries.map((e) => e.id)).toEqual(["classic", "naive", "vertical"]);
         expect(c.entries.every((e) => e.builtin)).toBe(true);
         expect(c.warnings).toEqual([]);
     });
@@ -18,7 +18,7 @@ describe("buildCatalog", () => {
             { file: "kaiti.json", id: "kaiti", card: { schemaVersion: CARD_SCHEMA_VERSION, id: "kaiti", name: "楷体" } },
             { file: "plain.json", id: "plain", card: { schemaVersion: CARD_SCHEMA_VERSION, id: "plain" } },
         ]);
-        expect(c.entries.slice(2)).toEqual([
+        expect(c.entries.slice(BUILTIN_CARDS.length)).toEqual([
             { id: "kaiti", name: "楷体", builtin: false },
             { id: "plain", name: "plain", builtin: false },
         ]);

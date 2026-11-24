@@ -1,0 +1,61 @@
+/* 只描述 vertical 的排列方式；字体、字号、颜色、横竖排等来自卡片样式（见 style/card-base.css） */
+.vertical-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ex-card-gap);
+    height: 100%;
+    cursor: pointer;
+}
+
+/* 上半部分占满剩余高度：印章靠左上，原文竖排靠右上，列数随文字长短向左增长 */
+.vertical-top {
+    display: flex;
+    align-items: flex-start;
+    gap: calc(var(--ex-card-gap) * 2);
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.vertical-top > .ex-slot[data-slot="text"] {
+    margin-left: auto;
+    height: 100%;
+    min-width: 0;
+    overflow: hidden;
+}
+
+/* 每句独占新的一列，句子过长时在列底自动折到下一列 */
+.vertical-sentence {
+    display: block;
+}
+
+/* 出处印章：边框和底色都跟随出处的文字颜色 */
+.vertical-top > .ex-slot[data-slot="source"] {
+    flex: none;
+    padding: 0.35em 0.2em;
+    border: 1.5px solid currentColor;
+    border-radius: 4px;
+    background: color-mix(in srgb, currentColor 8%, transparent);
+}
+
+.vertical-divider {
+    display: var(--ex-translation-display);
+    flex: none;
+    width: 100%;
+    height: 0;
+    margin: var(--ex-card-gap) 0;
+    border: none;
+    border-top: 1px dashed currentColor;
+    opacity: 0.18;
+}
+
+.vertical-card > .ex-slot[data-slot="translation"] {
+    flex: none;
+}
+
+/* 章节始终在右下角，不随上方内容移动 */
+.vertical-footer {
+    display: flex;
+    justify-content: flex-end;
+    flex: none;
+}

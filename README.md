@@ -44,6 +44,7 @@ npm run build:portable   # 便携版，产物位于 app/src-tauri/target/release
 |---|---|---|
 | `classic` | 经典 | 默认卡片，也是所有卡片的兜底样式；使用打包的思源宋体，原文 Bold、译文与来源 Light |
 | `naive` | 极简 | 只显示原文，居中、大字号 |
+| `vertical` | 纵向 | 竖长卡片：原文竖排、出处为左上角印章，虚线下方为译文，右下角显示章节 |
 
 ### 添加自己的卡片
 

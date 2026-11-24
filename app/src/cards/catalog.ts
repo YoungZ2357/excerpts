@@ -3,9 +3,10 @@ import type { UserCardFile } from "./backend.ts";
 import type { ResolveContext } from "./style/resolve.ts";
 import { classicCard } from "./presets/classic.ts";
 import { naiveCard } from "./presets/naive.ts";
+import { verticalCard } from "./presets/vertical.ts";
 
 /** 内置卡片，顺序即菜单中的顺序 */
-export const BUILTIN_CARDS: readonly CardDef[] = [classicCard, naiveCard];
+export const BUILTIN_CARDS: readonly CardDef[] = [classicCard, naiveCard, verticalCard];
 
 export interface CardEntry {
     id: string;

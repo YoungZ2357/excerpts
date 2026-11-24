@@ -35,6 +35,17 @@ Excerpt 每次会在一张“卡片”上显示一句摘抄。卡片决定这句
 
 适合当作桌面上的一句“座右铭”。
 
+### 竖排
+
+竖长的卡片，仿古籍排版：
+
+- **原文**：竖排，从右往左成列
+- **出处**：做成小印章，放在左上角
+- **译文**：在虚线下方横排显示
+- **章节**：显示在右下角
+
+适合读古文的时候。
+
 > 内置卡片不能被修改或覆盖。想在它们的基础上调整，请新建一张自己的卡片（见下文）。
 
 ---
@@ -92,7 +103,7 @@ Excerpt 每次会在一张“卡片”上显示一句摘抄。卡片决定这句
 文件名要求：
 
 - 只能用**小写英文字母、数字、`-` 和 `_`**，例如 `kaiti`、`my-card`、`card_2`
-- 不能叫 `classic` 或 `naive`（内置卡片已经占用了这两个名字）
+- 不能叫 `classic`、`naive` 或 `vertical`（内置卡片已经占用了这些名字）
 
 保存时请选择 **UTF-8** 编码（Windows 记事本默认就是）。
 
@@ -161,28 +172,6 @@ Excerpt 每次会在一张“卡片”上显示一句摘抄。卡片决定这句
 ```
 
 `slots` 里可以单独设置某个元素：`text` 原文、`translation` 译文、`source` 出处、`path` 目录。
-
-### 古籍竖排
-
-更大的窗口、米黄色背景、原文竖排，出处放在右下角：
-
-```json
-{
-  "schemaVersion": 1,
-  "id": "vertical",
-  "name": "古籍竖排",
-  "style": {
-    "size": { "width": 480, "height": 360 },
-    "background": "#f4efe4",
-    "base": { "color": "#2b2b2b" },
-    "slots": {
-      "text": { "fontSize": 28, "letterSpacing": 0.1, "writingMode": "vertical" },
-      "translation": { "visible": false },
-      "source": { "position": { "x": 95, "y": 95, "anchor": "bottom-right" } }
-    }
-  }
-}
-```
 
 ### 在极简的基础上调整
 
