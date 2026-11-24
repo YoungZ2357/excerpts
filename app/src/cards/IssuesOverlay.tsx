@@ -1,15 +1,17 @@
 import "./issues.css";
 
 interface IssuesOverlayProps {
+    /** 默认为「卡片问题」 */
+    title?: string;
     issues: string[];
     onClose: () => void;
 }
 
-/** 卡片问题列表浮层，点击任意位置关闭 */
-function IssuesOverlay({ issues, onClose }: IssuesOverlayProps) {
+/** 问题列表浮层，点击任意位置关闭 */
+function IssuesOverlay({ title = "卡片问题", issues, onClose }: IssuesOverlayProps) {
     return (
-        <div className="ex-issues" onClick={onClose} role="dialog" aria-label="卡片问题">
-            <h2>卡片问题（{issues.length}）</h2>
+        <div className="ex-issues" onClick={onClose} role="dialog" aria-label={title}>
+            <h2>{title}（{issues.length}）</h2>
             {issues.length === 0 ? (
                 <p>没有问题</p>
             ) : (

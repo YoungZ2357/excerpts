@@ -29,7 +29,7 @@ export default defineConfig([
 
   // Node 端：数据管线、共享包、各类配置文件
   {
-    files: ['pipeline/**/*.ts', 'packages/**/*.ts', '**/*.config.{ts,js,mjs}'],
+    files: ['pipeline/**/*.ts', 'packages/**/*.ts', 'app/scripts/**/*.mjs', '**/*.config.{ts,js,mjs}'],
     languageOptions: { globals: globals.node },
   },
 ])

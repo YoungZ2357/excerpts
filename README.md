@@ -6,13 +6,37 @@
 
 
 ## 安装
-TBD
+
+在 [Releases](https://github.com/YoungZ2357/excerpts/releases) 页面下载，两种形式任选其一：
+
+| 文件 | 说明 |
+|---|---|
+| `Excerpts_<版本>_x64-setup.exe` | 安装版。安装到当前用户，无需管理员权限；数据保存在系统用户目录中 |
+| `Excerpts_<版本>_x64-portable.exe` | 便携版。单个 exe，双击即用，无需安装；所有数据保存在 exe 同目录的 `ExcerptsData` 文件夹中，不写入系统目录 |
+
+> - 程序暂未签名，Windows SmartScreen 可能提示"已保护你的电脑"，点击「更多信息 → 仍要运行」即可。
+> - 需要 Microsoft Edge WebView2 运行时。Windows 11 自带，多数 Windows 10 已通过系统更新安装；安装版会在缺失时自动安装，便携版不会，缺失时请先从微软官网安装 WebView2。
+> - 便携版请放在有写入权限的位置（如桌面、U 盘），不要放在 `C:\Program Files` 下。搬到别处时连同 `ExcerptsData` 一起复制，即可保留数据集、卡片与设置。
+
+目前只提供 Windows 版本。自行构建：
+
+```sh
+npm ci
+npm run build            # 安装版，产物位于 app/src-tauri/target/release/bundle/nsis
+npm run build:portable   # 便携版，产物位于 app/src-tauri/target/release/bundle/portable
+```
+
+## 数据集
+
+> 完整说明见 [数据集使用指南](docs/datasets.md)。
+
+右键 →「数据集」可以导入 JSON 格式的摘抄文件、勾选启用的数据集（同时勾选多个即可合并抽句）、删除数据集。启用状态会被记住。数据保存在 `library.db`（SQLite）中：安装版位于 `%LOCALAPPDATA%\io.github.YoungZ2357.excerpts\`，便携版位于 exe 旁的 `ExcerptsData\`。首次启动自带一个「示例」数据集。
 
 ## 自定义卡片
 
 > 面向使用者的完整说明见 [卡片使用指南](docs/cards.md)。
 
-在卡片上**右键**可以切换卡片、重新加载卡片、打开卡片文件夹。左键点击切换到下一条摘抄。
+在卡片上**右键**可以切换卡片、管理数据集、重新加载卡片、打开卡片文件夹。左键点击切换到下一条摘抄。
 
 内置卡片：
 
@@ -23,7 +47,7 @@ TBD
 
 ### 添加自己的卡片
 
-1. 右键 →「打开卡片文件夹」。文件夹位置：
+1. 右键 →「打开卡片文件夹」。文件夹位置（便携版为 exe 旁的 `ExcerptsData\cards`）：
    - Windows：`%APPDATA%\io.github.YoungZ2357.excerpts\cards`
    - macOS：`~/Library/Application Support/io.github.YoungZ2357.excerpts/cards`
    - Linux：`~/.config/io.github.YoungZ2357.excerpts/cards`
@@ -77,7 +101,7 @@ TBD
 - 建议使用 woff2，体积更小；原始 otf/ttf 可放在 `source/` 子目录中留存，子目录不会被打包。
 - 字体只在卡片用到时才加载；切换卡片时会等字体加载完（最多 1.5 秒）再显示新卡片。只等待字体栈中排在最前面的打包字体，排在已安装字体之后的打包字体只作备选，不会等待。
 - 清单写错（文件不存在、粗细非法、未登记的字体文件等）会出现在右键菜单的「⚠ 卡片问题」中。
-- 仓库中只收录 classic 使用的思源宋体 woff2 与 `fonts.json`（见 `.gitignore`）；新增的字体默认不入库，需要时在 `.gitignore` 中加入对应的 `!` 规则。字体缺失时，引用它们的卡片会退回已安装的字体。
+- 仓库中只收录 classic 使用的思源宋体 woff2、其许可证 `LICENSE-SourceHanSerif.txt` 与 `fonts.json`（见 `.gitignore`）；新增需随应用再分发的字体时，须同时附上其许可证，并在 `THIRD_PARTY_NOTICES.md` 与 `app/src/about/notices.ts` 中登记；新增的字体默认不入库，需要时在 `.gitignore` 中加入对应的 `!` 规则。字体缺失时，引用它们的卡片会退回已安装的字体。
 
 ### 注意
 
@@ -95,3 +119,7 @@ TBD
 
 1. linting, 测试覆盖, 硬编码行为扫描
 2. NiuTrans的语料数据(不论bitext.txt还是source.txt&target.txt)存在句行不匹配，
+
+## 第三方许可
+
+发布版本内置了 Adobe 的思源宋体（Source Han Serif SC），以 SIL Open Font License 1.1 授权再分发。详见 [第三方许可声明](THIRD_PARTY_NOTICES.md)，应用内可通过右键 →「关于与许可…」查看许可证全文。
