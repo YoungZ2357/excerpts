@@ -1,9 +1,36 @@
 /* 只描述 classic 的排列方式；字体、字号、对齐等全部来自卡片样式（见 style/card-base.css） */
 .classic-card {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    /* 主体区占满剩余高度，底栏按内容高度贴在卡片底部 */
+    grid-template-rows: minmax(0, 1fr) auto;
     gap: var(--ex-card-gap);
     height: 100%;
     cursor: pointer;
 }
 
+.classic-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ex-card-gap);
+    min-height: 0;
+    overflow: hidden;
+}
+
+.classic-footer {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--ex-card-gap);
+    min-width: 0;
+}
+
+/* 来源始终在右下角：即使 path 隐藏，也靠 margin-left: auto 推到最右 */
+.classic-footer > .ex-slot[data-slot="source"] {
+    margin-left: auto;
+    flex: 0 1 auto;
+    min-width: 0;
+}
+
+.classic-footer > .ex-slot[data-slot="path"] {
+    flex: 1 1 auto;
+    min-width: 0;
+}

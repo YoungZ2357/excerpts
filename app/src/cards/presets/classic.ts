@@ -36,7 +36,7 @@ export const CLASSIC_STYLE: ResolvedCardStyle = {
     background: "#FEF6E5",
     radius: 0,
     slots: {
-        text: { ...slotBase, fontSize: 28, fontWeight: BOLD, lineHeight: 1.2, align: "center" },
+        text: { ...slotBase, fontSize: 28, fontWeight: BOLD, lineHeight: 1.2, align: "left" },
         translation: { ...slotBase, opacity: 0.75 },
         source: { ...slotBase, fontSize: 14, opacity: 0.6, align: "right" },
         path: { ...slotBase, fontSize: 12, opacity: 0.5, visible: false },
