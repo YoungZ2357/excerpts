@@ -30,16 +30,24 @@ const slotBase: ResolvedSlotStyle = {
  */
 export const CLASSIC_STYLE: ResolvedCardStyle = {
     size: { width: 500, height: 280 },
-    padding: [16, 20],
-    gap: 8,
+    padding: [28, 36],
+    gap: 10,
     // 背景作用在卡片外框上，铺满整个窗口（包括四周留白）
-    background: "#FEF6E5",
+    background: "#FBF5EA",
     radius: 0,
+    // 层次靠字号和真实颜色区分，不用 opacity：半透明文字叠在米色底上会发灰
     slots: {
-        text: { ...slotBase, fontSize: 28, fontWeight: BOLD, lineHeight: 1.2, align: "left" },
-        translation: { ...slotBase, opacity: 0.75 },
-        source: { ...slotBase, fontSize: 14, opacity: 0.6, align: "right" },
-        path: { ...slotBase, fontSize: 12, opacity: 0.5, visible: false },
+        text: {
+            ...slotBase,
+            fontSize: 28,
+            fontWeight: BOLD,
+            lineHeight: 1.4,
+            letterSpacing: 0.02,
+            color: "#2A251F",
+        },
+        translation: { ...slotBase, fontSize: 17, lineHeight: 1.7, color: "#7A6F62" },
+        source: { ...slotBase, fontSize: 13, letterSpacing: 0.1, color: "#9A8E80", align: "right" },
+        path: { ...slotBase, fontSize: 12, color: "#9A8E80", visible: false },
     },
 };
 

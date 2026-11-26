@@ -1,5 +1,8 @@
-/* 只描述 classic 的排列方式；字体、字号、对齐等全部来自卡片样式（见 style/card-base.css） */
+/* 只描述 classic 的排列方式；字体、字号、颜色、对齐等全部来自卡片样式（见 style/card-base.css） */
 .classic-card {
+    /* 分隔线的强调色：卡片样式里没有对应字段，作为布局的一部分写在这里 */
+    --classic-accent: #b5651d;
+
     display: grid;
     /* 主体区占满剩余高度，底栏按内容高度贴在卡片底部 */
     grid-template-rows: minmax(0, 1fr) auto;
@@ -8,24 +11,44 @@
     cursor: pointer;
 }
 
+/*
+ * 主体区：上下两个伸缩占位把内容挤到中间，下方占位更大，内容落在视觉中心（略高于几何中心）。
+ * 内容放不下时占位缩到 0，内容从顶部开始排、超出部分在底部裁掉，不会把开头裁掉。
+ */
 .classic-body {
     display: flex;
     flex-direction: column;
-    gap: var(--ex-card-gap);
     min-height: 0;
     overflow: hidden;
 }
 
-/* 正文与译文之间的分隔线：随译文一起显示 / 隐藏，上下各留出一段间隔 */
+.classic-body::before,
+.classic-body::after {
+    content: "";
+    flex: 1 1 0;
+}
+
+.classic-body::after {
+    flex-grow: 1.5;
+}
+
+.classic-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ex-card-gap);
+    flex: none;
+}
+
+/* 正文与译文之间的短分隔线：靠左、强调色，随译文一起显示 / 隐藏 */
 .classic-divider {
     display: var(--ex-translation-display);
     flex: none;
-    width: 100%;
+    width: 28px;
     height: 0;
-    margin: calc(var(--ex-card-gap) * 1.5) 0;
+    margin: calc(var(--ex-card-gap) * 0.6) 0;
     border: none;
-    border-top: 1px solid currentColor;
-    opacity: 0.12;
+    border-top: 1.5px solid var(--classic-accent);
+    opacity: 0.55;
 }
 
 .classic-footer {
